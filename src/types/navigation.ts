@@ -4,7 +4,8 @@ import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type RootStackParamList = {
   Home: undefined;
-  Details: { id: string };
+  Menu: undefined;
+  About: undefined;
 };
 
 export type DrawerParamList = {
@@ -12,8 +13,9 @@ export type DrawerParamList = {
 };
 
 export type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
-export type DetailsScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Details'>;
-export type DetailsScreenRouteProp = RouteProp<RootStackParamList, 'Details'>;
+export type MenuScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Menu'>;
+export type AboutScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'About'>;
+export type MenuScreenRouteProp = RouteProp<RootStackParamList, 'Menu'>;
 
 declare global {
   namespace ReactNavigation {

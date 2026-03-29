@@ -14,8 +14,8 @@ module.exports = () => {
 
   return {
     expo: {
-      name: 'Template App',
-      slug: 'template-react-native-web-expo-ts',
+      name: 'Milkshakespeare',
+      slug: 'milkshakespeare',
       version: '1.0.0',
       orientation: 'portrait',
       icon: './assets/icon.png',
@@ -23,20 +23,20 @@ module.exports = () => {
       splash: {
         image: './assets/splash.png',
         resizeMode: 'contain',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#fffbe8',
       },
       assetBundlePatterns: ['**/*'],
       ios: {
         supportsTablet: true,
-        bundleIdentifier: 'com.yourorg.templateapp',
+        bundleIdentifier: 'com.milkshakespeare.app',
         googleServicesFile: './GoogleService-Info.plist',
       },
       android: {
         adaptiveIcon: {
           foregroundImage: './assets/adaptive-icon.png',
-          backgroundColor: '#ffffff',
+          backgroundColor: '#fffbe8',
         },
-        package: 'com.yourorg.templateapp',
+        package: 'com.milkshakespeare.app',
         googleServicesFile: './google-services.json',
       },
       web: { favicon: './assets/favicon.png' },
