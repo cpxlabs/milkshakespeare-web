@@ -3,7 +3,7 @@ import { View, Pressable } from 'react-native';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import type { DrawerContentComponentProps } from '@react-navigation/drawer';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Home, Moon, Sun, Languages } from 'lucide-react-native';
+import { Home, Moon, Sun, Languages, BookOpen, UtensilsCrossed } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { Text } from '@/components/ui/text';
 import { Toggle } from '@/components/ui/toggle';
@@ -26,6 +26,16 @@ export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
     props.navigation.closeDrawer();
   };
 
+  const navigateToMenu = () => {
+    props.navigation.navigate('Main', { screen: 'Menu' });
+    props.navigation.closeDrawer();
+  };
+
+  const navigateToAbout = () => {
+    props.navigation.navigate('Main', { screen: 'About' });
+    props.navigation.closeDrawer();
+  };
+
   const cycleLanguage = () => {
     const currentIndex = LANGUAGES.findIndex((l) => l.code === language);
     const nextIndex = (currentIndex + 1) % LANGUAGES.length;
@@ -34,6 +44,8 @@ export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
 
   const currentLanguageLabel =
     LANGUAGES.find((l) => l.code === language)?.label ?? language;
+
+  const iconColor = isDark ? '#fffbe8' : '#0b234a';
 
   return (
     <DrawerContentScrollView
@@ -54,8 +66,24 @@ export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
             onPress={navigateToHome}
             className="flex-row items-center gap-3 rounded-md px-3 py-3 active:bg-accent"
           >
-            <Home size={20} color={isDark ? '#fafafa' : '#09090b'} />
+            <Home size={20} color={iconColor} />
             <Text className="text-base text-foreground">{t('sidemenu.home')}</Text>
+          </Pressable>
+
+          <Pressable
+            onPress={navigateToMenu}
+            className="flex-row items-center gap-3 rounded-md px-3 py-3 active:bg-accent"
+          >
+            <UtensilsCrossed size={20} color={iconColor} />
+            <Text className="text-base text-foreground">{t('sidemenu.menu')}</Text>
+          </Pressable>
+
+          <Pressable
+            onPress={navigateToAbout}
+            className="flex-row items-center gap-3 rounded-md px-3 py-3 active:bg-accent"
+          >
+            <BookOpen size={20} color={iconColor} />
+            <Text className="text-base text-foreground">{t('sidemenu.about')}</Text>
           </Pressable>
         </View>
 
@@ -68,9 +96,9 @@ export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
           <View className="flex-row items-center justify-between px-3 py-2">
             <View className="flex-row items-center gap-3">
               {isDark ? (
-                <Moon size={20} color={isDark ? '#fafafa' : '#09090b'} />
+                <Moon size={20} color={iconColor} />
               ) : (
-                <Sun size={20} color={isDark ? '#fafafa' : '#09090b'} />
+                <Sun size={20} color={iconColor} />
               )}
               <Text className="text-base text-foreground">
                 {isDark ? t('sidemenu.darkMode') : t('sidemenu.lightMode')}
@@ -79,8 +107,8 @@ export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
             <Toggle
               value={isDark}
               onValueChange={toggleTheme}
-              activeColor="#3b82f6"
-              inactiveColor="#d1d5db"
+              activeColor="#d3b03b"
+              inactiveColor="#3664a0"
             />
           </View>
 
@@ -90,7 +118,7 @@ export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
             className="flex-row items-center justify-between px-3 py-2 rounded-md active:bg-accent"
           >
             <View className="flex-row items-center gap-3">
-              <Languages size={20} color={isDark ? '#fafafa' : '#09090b'} />
+              <Languages size={20} color={iconColor} />
               <Text className="text-base text-foreground">{t('sidemenu.language')}</Text>
             </View>
             <Text className="text-sm text-muted-foreground">{currentLanguageLabel}</Text>

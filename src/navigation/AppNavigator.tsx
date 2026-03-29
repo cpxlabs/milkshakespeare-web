@@ -5,7 +5,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { RootStackParamList, DrawerParamList } from '../types/navigation';
 import { DrawerContent } from '../components/DrawerContent';
 import HomeScreen from '../screens/HomeScreen';
-import DetailsScreen from '../screens/DetailsScreen';
+import MenuScreen from '../screens/DetailsScreen';
+import AboutScreen from '../screens/AboutScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -16,7 +17,8 @@ const MainStack: React.FC = () => (
     screenOptions={{ headerShown: false, animation: 'slide_from_right' }}
   >
     <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="Details" component={DetailsScreen} />
+    <Stack.Screen name="Menu" component={MenuScreen} />
+    <Stack.Screen name="About" component={AboutScreen} />
   </Stack.Navigator>
 );
 
