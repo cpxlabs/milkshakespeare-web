@@ -8,6 +8,27 @@ import { Text } from '@/components/ui/text';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { MenuButton } from '@/components/ui/menu-button';
 
+const FEATURED_ITEMS = [
+  {
+    nameKey: 'home.featuredRomeo',
+    descKey: 'home.featuredRomeoDesc',
+    emoji: '🍓',
+    accentClass: 'border-l-4 border-l-destructive',
+  },
+  {
+    nameKey: 'home.featuredHamlet',
+    descKey: 'home.featuredHamletDesc',
+    emoji: '🍫',
+    accentClass: 'border-l-4 border-l-secondary',
+  },
+  {
+    nameKey: 'home.featuredMidsummer',
+    descKey: 'home.featuredMidsummerDesc',
+    emoji: '🌸',
+    accentClass: 'border-l-4 border-l-accent',
+  },
+];
+
 const HomeScreen: React.FC = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const { t } = useTranslation();
@@ -17,76 +38,96 @@ const HomeScreen: React.FC = () => {
       <MenuButton />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         {/* Hero Section */}
-        <View className="bg-primary px-8 pt-20 pb-12 items-center">
+        <View className="bg-primary px-8 pt-20 pb-14 items-center">
+          <Text className="text-lg tracking-widest text-accent font-semibold uppercase text-center mb-2">
+            {t('home.heroLabel')}
+          </Text>
           <Text className="text-5xl font-extrabold text-primary-foreground text-center tracking-tight">
             {t('home.title')}
           </Text>
-          <Text className="text-xl text-primary-foreground/80 text-center mt-3 italic">
+          <View className="w-16 h-1 bg-accent rounded-full mt-4 mb-4" />
+          <Text className="text-xl text-primary-foreground/80 text-center italic">
             {t('home.subtitle')}
           </Text>
-          <Text className="text-base text-primary-foreground/70 text-center mt-4 max-w-md">
+          <Text className="text-base text-primary-foreground/70 text-center mt-4 max-w-md leading-6">
             {t('home.heroTagline')}
           </Text>
-          <View className="flex-row gap-3 mt-6">
+          <View className="flex-row gap-3 mt-8">
             <Button
               onPress={() => navigation.navigate('Menu')}
-              className="bg-accent"
+              className="bg-accent px-6"
+              size="lg"
             >
-              <Text className="text-accent-foreground font-semibold">{t('home.viewFullMenu')}</Text>
+              <Text className="text-accent-foreground font-bold">{t('home.viewFullMenu')}</Text>
             </Button>
             <Button
               variant="outline"
               onPress={() => navigation.navigate('About')}
-              className="border-primary-foreground/30"
+              className="border-primary-foreground/30 px-6"
+              size="lg"
             >
-              <Text className="text-primary-foreground">{t('home.learnMore')}</Text>
+              <Text className="text-primary-foreground font-semibold">{t('home.learnMore')}</Text>
             </Button>
           </View>
         </View>
 
         {/* About Preview */}
-        <View className="px-8 py-10 items-center">
-          <Text className="text-2xl font-bold text-foreground text-center">
-            {t('home.aboutTitle')}
-          </Text>
-          <Text className="text-base text-muted-foreground text-center mt-3 max-w-lg leading-6">
-            {t('home.aboutText')}
-          </Text>
+        <View className="px-8 py-12 items-center">
+          <View className="w-full max-w-lg items-center">
+            <Text className="text-sm tracking-widest text-accent font-semibold uppercase mb-2">
+              {t('home.aboutLabel')}
+            </Text>
+            <Text className="text-2xl font-bold text-foreground text-center">
+              {t('home.aboutTitle')}
+            </Text>
+            <View className="w-10 h-0.5 bg-accent rounded-full mt-3 mb-4" />
+            <Text className="text-base text-muted-foreground text-center max-w-lg leading-7">
+              {t('home.aboutText')}
+            </Text>
+          </View>
         </View>
 
         {/* Featured Creations */}
-        <View className="px-8 pb-10 items-center">
-          <Text className="text-2xl font-bold text-foreground text-center mb-6">
+        <View className="bg-muted/50 px-8 py-12 items-center">
+          <Text className="text-sm tracking-widest text-accent font-semibold uppercase mb-2">
+            {t('home.featuredLabel')}
+          </Text>
+          <Text className="text-2xl font-bold text-foreground text-center mb-8">
             {t('home.featuredTitle')}
           </Text>
           <View className="w-full max-w-lg gap-4">
-            <Card className="w-full border-accent/30">
-              <CardHeader>
-                <CardTitle className="text-secondary">{t('home.featuredRomeo')}</CardTitle>
-                <CardDescription>{t('home.featuredRomeoDesc')}</CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="w-full border-accent/30">
-              <CardHeader>
-                <CardTitle className="text-secondary">{t('home.featuredHamlet')}</CardTitle>
-                <CardDescription>{t('home.featuredHamletDesc')}</CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="w-full border-accent/30">
-              <CardHeader>
-                <CardTitle className="text-secondary">{t('home.featuredMidsummer')}</CardTitle>
-                <CardDescription>{t('home.featuredMidsummerDesc')}</CardDescription>
-              </CardHeader>
-            </Card>
+            {FEATURED_ITEMS.map((item) => (
+              <Card key={item.nameKey} className={`w-full ${item.accentClass}`}>
+                <CardHeader className="flex-row items-center gap-4">
+                  <Text className="text-3xl">{item.emoji}</Text>
+                  <View className="flex-1 gap-1.5">
+                    <CardTitle className="text-secondary">{t(item.nameKey)}</CardTitle>
+                    <CardDescription>{t(item.descKey)}</CardDescription>
+                  </View>
+                </CardHeader>
+              </Card>
+            ))}
           </View>
 
+          <Button onPress={() => navigation.navigate('Menu')} className="mt-8" size="lg">
+            <Text className="font-bold">{t('home.viewFullMenu')}</Text>
+          </Button>
+        </View>
+
+        {/* Footer CTA */}
+        <View className="bg-secondary px-8 py-10 items-center">
+          <Text className="text-xl font-bold text-secondary-foreground text-center">
+            {t('home.ctaTitle')}
+          </Text>
+          <Text className="text-base text-secondary-foreground/80 text-center mt-2 max-w-md leading-6">
+            {t('home.ctaText')}
+          </Text>
           <Button
-            onPress={() => navigation.navigate('Menu')}
-            className="mt-6"
+            variant="outline"
+            onPress={() => navigation.navigate('About')}
+            className="mt-6 border-secondary-foreground/30"
           >
-            <Text>{t('home.viewFullMenu')}</Text>
+            <Text className="text-secondary-foreground font-semibold">{t('home.learnMore')}</Text>
           </Button>
         </View>
       </ScrollView>

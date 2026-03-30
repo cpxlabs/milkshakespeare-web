@@ -7,9 +7,12 @@
   "home": {
     "title": "Milkshakespeare",
     "subtitle": "Where Every Sip Tells a Story",
+    "heroLabel": "Welcome to",
     "heroTagline": "Craft milkshakes inspired by the greatest literary works of all time.",
+    "aboutLabel": "Discover",
     "aboutTitle": "Our Story",
     "aboutText": "Born from a love of classic literature and artisanal milkshakes, Milkshakespeare brings you handcrafted shakes that are as rich in flavor as the tales that inspire them.",
+    "featuredLabel": "Don't Miss",
     "featuredTitle": "Featured Creations",
     "featuredRomeo": "Romeo & Juliet Berry",
     "featuredRomeoDesc": "A passionate blend of strawberries, raspberries, and a hint of rose.",
@@ -18,11 +21,14 @@
     "featuredMidsummer": "Midsummer Night's Dream",
     "featuredMidsummerDesc": "Lavender, vanilla bean, and honeycomb in a dreamy swirl.",
     "viewFullMenu": "View Full Menu",
-    "learnMore": "Our Story"
+    "learnMore": "Our Story",
+    "ctaTitle": "Ready for a Literary Experience?",
+    "ctaText": "Visit us today and discover how the world's greatest stories taste in a glass."
   },
   "menu": {
     "title": "The Menu",
     "subtitle": "Every shake, a masterpiece",
+    "headerLabel": "Explore",
     "tragedies": "The Tragedies",
     "comedies": "The Comedies",
     "histories": "The Histories",
@@ -50,6 +56,8 @@
   },
   "about": {
     "title": "About Milkshakespeare",
+    "headerLabel": "Get to Know Us",
+    "headerSubtitle": "Where literature meets the art of milkshake making",
     "storyTitle": "A Tale of Two Passions",
     "storyText": "Milkshakespeare was founded with a singular vision: to marry the timeless art of storytelling with the joyful craft of milkshake making. Every shake on our menu is inspired by Shakespeare's greatest works, blending premium ingredients with literary imagination.",
     "missionTitle": "Our Mission",

@@ -7,9 +7,12 @@
   "home": {
     "title": "Milkshakespeare",
     "subtitle": "Onde Cada Gole Conta uma História",
+    "heroLabel": "Bem-vindo ao",
     "heroTagline": "Milkshakes artesanais inspirados nas maiores obras literárias de todos os tempos.",
+    "aboutLabel": "Descubra",
     "aboutTitle": "Nossa História",
     "aboutText": "Nascido do amor pela literatura clássica e milkshakes artesanais, o Milkshakespeare traz shakes feitos à mão, tão ricos em sabor quanto os contos que os inspiram.",
+    "featuredLabel": "Imperdível",
     "featuredTitle": "Criações em Destaque",
     "featuredRomeo": "Romeu e Julieta de Frutas Vermelhas",
     "featuredRomeoDesc": "Uma mistura apaixonada de morangos, framboesas e um toque de rosa.",
@@ -18,11 +21,14 @@
     "featuredMidsummer": "Sonho de Uma Noite de Verão",
     "featuredMidsummerDesc": "Lavanda, baunilha e favo de mel em uma mistura encantadora.",
     "viewFullMenu": "Ver Cardápio Completo",
-    "learnMore": "Nossa História"
+    "learnMore": "Nossa História",
+    "ctaTitle": "Pronto para uma Experiência Literária?",
+    "ctaText": "Visite-nos hoje e descubra o sabor das maiores histórias do mundo em um copo."
   },
   "menu": {
     "title": "O Cardápio",
     "subtitle": "Cada shake, uma obra-prima",
+    "headerLabel": "Explore",
     "tragedies": "As Tragédias",
     "comedies": "As Comédias",
     "histories": "Os Históricos",
@@ -50,6 +56,8 @@
   },
   "about": {
     "title": "Sobre o Milkshakespeare",
+    "headerLabel": "Conheça-nos",
+    "headerSubtitle": "Onde a literatura encontra a arte de fazer milkshakes",
     "storyTitle": "Um Conto de Duas Paixões",
     "storyText": "O Milkshakespeare foi fundado com uma visão singular: unir a arte atemporal da narrativa com a alegria de criar milkshakes artesanais. Cada shake do nosso cardápio é inspirado nas maiores obras de Shakespeare, combinando ingredientes premium com imaginação literária.",
     "missionTitle": "Nossa Missão",
