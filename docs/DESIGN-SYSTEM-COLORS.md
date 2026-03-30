@@ -520,5 +520,5 @@ For questions or issues with the design system:
 
 ---
 
-**Last Updated**: 2026-02-12
+**Last Updated**: 2026-03-30
 **Version**: 1.0.0
