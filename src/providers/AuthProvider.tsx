@@ -12,6 +12,7 @@ interface User {
   name: string;
   photo?: string;
   role: UserRole;
+  provider?: 'google' | 'facebook' | 'instagram' | 'guest';
 }
 
 interface AuthContextValue {
@@ -22,6 +23,10 @@ interface AuthContextValue {
   setViewMode: (mode: ViewMode) => void;
   hasPermission: (requiredRole: UserRole) => boolean;
   signIn: () => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
+  signInWithFacebook: () => Promise<void>;
+  signInWithInstagram: () => Promise<void>;
+  signInAsGuest: () => Promise<void>;
   signOut: () => Promise<void>;
 }
 
@@ -63,6 +68,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     loadUser();
   }, []);
 
+  const persistUser = useCallback(async (u: User) => {
+    await AsyncStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(u));
+    setUser(u);
+    if (ROLE_HIERARCHY[u.role] >= ROLE_HIERARCHY.admin) {
+      setViewModeState('admin');
+    }
+  }, []);
+
   const setViewMode = useCallback(
     (mode: ViewMode) => {
       if (user && ROLE_HIERARCHY[user.role] >= ROLE_HIERARCHY.admin) {
@@ -80,34 +93,80 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     [user]
   );
 
-  const signIn = useCallback(async () => {
+  const signInWithGoogle = useCallback(async () => {
     try {
       if (Platform.OS === 'web') {
-        // Web stub: simulate sign-in with guest user
-        const guestUser: User = {
-          id: 'guest',
-          email: 'guest@example.com',
-          name: 'Guest User',
+        const googleUser: User = {
+          id: 'google-web-user',
+          email: 'user@gmail.com',
+          name: 'Google User',
           role: 'client',
+          provider: 'google',
         };
-        await AsyncStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(guestUser));
-        setUser(guestUser);
+        await persistUser(googleUser);
       } else {
-        // Native: use Google Sign-In
-        // This is a stub — real implementation requires @react-native-google-signin/google-signin
         const nativeUser: User = {
-          id: 'native-user',
-          email: 'user@example.com',
-          name: 'Native User',
+          id: 'google-native-user',
+          email: 'user@gmail.com',
+          name: 'Google User',
           role: 'client',
+          provider: 'google',
         };
-        await AsyncStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(nativeUser));
-        setUser(nativeUser);
+        await persistUser(nativeUser);
       }
     } catch {
       // handle error
     }
-  }, []);
+  }, [persistUser]);
+
+  const signInWithFacebook = useCallback(async () => {
+    try {
+      const fbUser: User = {
+        id: 'facebook-user',
+        email: 'user@facebook.com',
+        name: 'Facebook User',
+        role: 'client',
+        provider: 'facebook',
+      };
+      await persistUser(fbUser);
+    } catch {
+      // handle error
+    }
+  }, [persistUser]);
+
+  const signInWithInstagram = useCallback(async () => {
+    try {
+      const igUser: User = {
+        id: 'instagram-user',
+        email: 'user@instagram.com',
+        name: 'Instagram User',
+        role: 'client',
+        provider: 'instagram',
+      };
+      await persistUser(igUser);
+    } catch {
+      // handle error
+    }
+  }, [persistUser]);
+
+  const signInAsGuest = useCallback(async () => {
+    try {
+      const guestUser: User = {
+        id: 'guest',
+        email: 'guest@example.com',
+        name: 'Guest User',
+        role: 'client',
+        provider: 'guest',
+      };
+      await persistUser(guestUser);
+    } catch {
+      // handle error
+    }
+  }, [persistUser]);
+
+  const signIn = useCallback(async () => {
+    await signInAsGuest();
+  }, [signInAsGuest]);
 
   const signOut = useCallback(async () => {
     try {
@@ -129,6 +188,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setViewMode,
         hasPermission,
         signIn,
+        signInWithGoogle,
+        signInWithFacebook,
+        signInWithInstagram,
+        signInAsGuest,
         signOut,
       }}
     >

@@ -23,6 +23,13 @@ const VALUES = [
   },
 ];
 
+const OFFERINGS = [
+  { key: 'about.offerCafe', emoji: '☕' },
+  { key: 'about.offerGames', emoji: '♟️' },
+  { key: 'about.offerBooks', emoji: '📚' },
+  { key: 'about.offerCollectibles', emoji: '🎮' },
+];
+
 const AboutScreen: React.FC = () => {
   const navigation = useNavigation<AboutScreenNavigationProp>();
   const { t } = useTranslation();
@@ -73,6 +80,28 @@ const AboutScreen: React.FC = () => {
                 <Text className="text-base text-muted-foreground leading-7">
                   {t('about.missionText')}
                 </Text>
+              </View>
+            </View>
+
+            {/* What We Offer */}
+            <View className="gap-4">
+              <View className="flex-row items-center gap-3">
+                <Text className="text-2xl">🏪</Text>
+                <Text className="text-2xl font-bold text-foreground">
+                  {t('about.whatWeOffer')}
+                </Text>
+              </View>
+              <View className="gap-3">
+                {OFFERINGS.map((offering) => (
+                  <Card key={offering.key} className="border-accent/20">
+                    <CardContent className="flex-row items-center gap-4 pt-4">
+                      <Text className="text-2xl">{offering.emoji}</Text>
+                      <Text className="text-base text-foreground leading-6 flex-1">
+                        {t(offering.key)}
+                      </Text>
+                    </CardContent>
+                  </Card>
+                ))}
               </View>
             </View>
 

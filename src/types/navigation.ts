@@ -6,6 +6,8 @@ export type RootStackParamList = {
   Home: undefined;
   Menu: undefined;
   About: undefined;
+  Login: undefined;
+  Cart: undefined;
   Tables: undefined;
   TableOrder: { tableId: string };
   Admin: undefined;
@@ -18,6 +20,8 @@ export type DrawerParamList = {
 export type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 export type MenuScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Menu'>;
 export type AboutScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'About'>;
+export type LoginScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Login'>;
+export type CartScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Cart'>;
 export type TablesScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Tables'>;
 export type TableOrderScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
