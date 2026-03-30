@@ -1,3 +1,5 @@
+> ✅ **Status: Completed** — This plan has been fully implemented. See the codebase for the current implementation.
+
 # Plan: Dark/Light Mode Switch + Side Menu (Web & Mobile)
 
 ## Current State
