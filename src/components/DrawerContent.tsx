@@ -3,12 +3,14 @@ import { View, Pressable } from 'react-native';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import type { DrawerContentComponentProps } from '@react-navigation/drawer';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Home, Moon, Sun, Languages, BookOpen, UtensilsCrossed } from 'lucide-react-native';
+import { Home, Moon, Sun, Languages, BookOpen, UtensilsCrossed, ShoppingCart, LogIn, User } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { Text } from '@/components/ui/text';
 import { Toggle } from '@/components/ui/toggle';
 import { useTheme } from '@/providers/ThemeProvider';
 import { useLanguage } from '@/providers/LanguageProvider';
+import { useAuth } from '@/providers/AuthProvider';
+import { useCart } from '@/providers/CartProvider';
 
 const LANGUAGES = [
   { code: 'en', label: 'English' },
@@ -18,6 +20,8 @@ const LANGUAGES = [
 export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
   const { isDark, toggleTheme } = useTheme();
   const { language, setLanguage } = useLanguage();
+  const { isAuthenticated, user } = useAuth();
+  const { totalItems } = useCart();
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
 
@@ -33,6 +37,16 @@ export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
 
   const navigateToAbout = () => {
     props.navigation.navigate('Main', { screen: 'About' });
+    props.navigation.closeDrawer();
+  };
+
+  const navigateToCart = () => {
+    props.navigation.navigate('Main', { screen: 'Cart' });
+    props.navigation.closeDrawer();
+  };
+
+  const navigateToLogin = () => {
+    props.navigation.navigate('Main', { screen: 'Login' });
     props.navigation.closeDrawer();
   };
 
@@ -79,11 +93,38 @@ export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
           </Pressable>
 
           <Pressable
+            onPress={navigateToCart}
+            className="flex-row items-center gap-3 rounded-md px-3 py-3 active:bg-accent"
+          >
+            <ShoppingCart size={20} color={iconColor} />
+            <Text className="text-base text-foreground flex-1">{t('sidemenu.cart')}</Text>
+            {totalItems > 0 && (
+              <View className="bg-accent rounded-full w-6 h-6 items-center justify-center">
+                <Text className="text-xs font-bold text-accent-foreground">{totalItems}</Text>
+              </View>
+            )}
+          </Pressable>
+
+          <Pressable
             onPress={navigateToAbout}
             className="flex-row items-center gap-3 rounded-md px-3 py-3 active:bg-accent"
           >
             <BookOpen size={20} color={iconColor} />
             <Text className="text-base text-foreground">{t('sidemenu.about')}</Text>
+          </Pressable>
+
+          <Pressable
+            onPress={navigateToLogin}
+            className="flex-row items-center gap-3 rounded-md px-3 py-3 active:bg-accent"
+          >
+            {isAuthenticated ? (
+              <User size={20} color={iconColor} />
+            ) : (
+              <LogIn size={20} color={iconColor} />
+            )}
+            <Text className="text-base text-foreground">
+              {isAuthenticated ? user?.name ?? t('sidemenu.profile') : t('sidemenu.login')}
+            </Text>
           </Pressable>
         </View>
 

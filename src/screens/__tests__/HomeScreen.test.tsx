@@ -8,21 +8,33 @@ jest.mock('react-i18next', () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {
         'home.title': 'Milkshakespeare',
-        'home.subtitle': 'Where Every Sip Tells a Story',
+        'home.subtitle': 'Café · Games · Books · Collectibles',
         'home.heroLabel': 'Welcome to',
-        'home.heroTagline': 'Craft milkshakes inspired by the greatest literary works of all time.',
+        'home.heroTagline': 'A cozy café where you can sip craft milkshakes, play retro board games & TCGs, browse books and vinyl, and discover rare collectibles — all under one roof.',
         'home.aboutLabel': 'Discover',
         'home.aboutTitle': 'Our Story',
-        'home.aboutText': 'Born from a love of classic literature and artisanal milkshakes.',
+        'home.aboutText': 'Born from a love of classic literature, tabletop games, and artisanal milkshakes.',
+        'home.experiencesTitle': 'More Than a Café',
+        'home.expGames': 'Retro Games & Board Games',
+        'home.expGamesDesc': 'Chess, checkers, and classic board games available for everyone.',
+        'home.expTCG': 'Trading Card Games',
+        'home.expTCGDesc': 'Buy, trade, and play your favorite TCGs with fellow enthusiasts.',
+        'home.expBooks': 'Books & Vinyl',
+        'home.expBooksDesc': 'Curated shelves of books, CDs, and vinyl records to explore.',
+        'home.expCollectibles': 'Rare Collectibles',
+        'home.expCollectiblesDesc': 'Retro game cartridges, rare cards, figurines, and more.',
         'home.featuredLabel': "Don't Miss",
         'home.featuredTitle': 'Featured Creations',
         'home.featuredRomeo': 'Romeo & Juliet Berry',
         'home.featuredRomeoDesc':
           'A passionate blend of strawberries, raspberries, and a hint of rose.',
+        'home.featuredRomeoPrice': 'R$ 22.90',
         'home.featuredHamlet': "Hamlet's Dark Chocolate",
         'home.featuredHamletDesc': 'To drink or not to drink.',
+        'home.featuredHamletPrice': 'R$ 24.90',
         'home.featuredMidsummer': "Midsummer Night's Dream",
         'home.featuredMidsummerDesc': 'Lavender, vanilla bean, and honeycomb.',
+        'home.featuredMidsummerPrice': 'R$ 25.90',
         'home.viewFullMenu': 'View Full Menu',
         'home.learnMore': 'Our Story',
         'home.ctaTitle': 'Ready for a Literary Experience?',
@@ -46,7 +58,7 @@ describe('HomeScreen', () => {
   it('displays expected translated text', () => {
     const { getByText } = render(<HomeScreen />);
     expect(getByText('Milkshakespeare')).toBeTruthy();
-    expect(getByText('Where Every Sip Tells a Story')).toBeTruthy();
+    expect(getByText('Café · Games · Books · Collectibles')).toBeTruthy();
   });
 
   it('has navigation buttons', () => {
@@ -55,12 +67,15 @@ describe('HomeScreen', () => {
     expect(menuButtons.length).toBeGreaterThan(0);
   });
 
-  it('displays featured creations', () => {
+  it('displays featured creations with prices', () => {
     const { getByText } = render(<HomeScreen />);
     expect(getByText('Featured Creations')).toBeTruthy();
     expect(getByText('Romeo & Juliet Berry')).toBeTruthy();
     expect(getByText("Hamlet's Dark Chocolate")).toBeTruthy();
     expect(getByText("Midsummer Night's Dream")).toBeTruthy();
+    expect(getByText('R$ 22.90')).toBeTruthy();
+    expect(getByText('R$ 24.90')).toBeTruthy();
+    expect(getByText('R$ 25.90')).toBeTruthy();
   });
 
   it('displays hero label and decorative elements', () => {
@@ -78,5 +93,14 @@ describe('HomeScreen', () => {
     expect(getByText('🍓')).toBeTruthy();
     expect(getByText('🍫')).toBeTruthy();
     expect(getByText('🌸')).toBeTruthy();
+  });
+
+  it('displays experiences section', () => {
+    const { getByText } = render(<HomeScreen />);
+    expect(getByText('More Than a Café')).toBeTruthy();
+    expect(getByText('Retro Games & Board Games')).toBeTruthy();
+    expect(getByText('Trading Card Games')).toBeTruthy();
+    expect(getByText('Books & Vinyl')).toBeTruthy();
+    expect(getByText('Rare Collectibles')).toBeTruthy();
   });
 });

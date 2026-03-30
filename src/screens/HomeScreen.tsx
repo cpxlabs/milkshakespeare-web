@@ -5,28 +5,38 @@ import { useTranslation } from 'react-i18next';
 import { HomeScreenNavigationProp } from '../types/navigation';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { MenuButton } from '@/components/ui/menu-button';
 
 const FEATURED_ITEMS = [
   {
     nameKey: 'home.featuredRomeo',
     descKey: 'home.featuredRomeoDesc',
+    priceKey: 'home.featuredRomeoPrice',
     emoji: '🍓',
     accentClass: 'border-l-4 border-l-destructive',
   },
   {
     nameKey: 'home.featuredHamlet',
     descKey: 'home.featuredHamletDesc',
+    priceKey: 'home.featuredHamletPrice',
     emoji: '🍫',
     accentClass: 'border-l-4 border-l-secondary',
   },
   {
     nameKey: 'home.featuredMidsummer',
     descKey: 'home.featuredMidsummerDesc',
+    priceKey: 'home.featuredMidsummerPrice',
     emoji: '🌸',
     accentClass: 'border-l-4 border-l-accent',
   },
+];
+
+const EXPERIENCES = [
+  { nameKey: 'home.expGames', descKey: 'home.expGamesDesc', emoji: '♟️' },
+  { nameKey: 'home.expTCG', descKey: 'home.expTCGDesc', emoji: '🃏' },
+  { nameKey: 'home.expBooks', descKey: 'home.expBooksDesc', emoji: '📚' },
+  { nameKey: 'home.expCollectibles', descKey: 'home.expCollectiblesDesc', emoji: '🎮' },
 ];
 
 const HomeScreen: React.FC = () => {
@@ -87,8 +97,33 @@ const HomeScreen: React.FC = () => {
           </View>
         </View>
 
+        {/* Experiences Section */}
+        <View className="bg-muted/30 px-8 py-12 items-center">
+          <Text className="text-sm tracking-widest text-accent font-semibold uppercase mb-2">
+            ✨
+          </Text>
+          <Text className="text-2xl font-bold text-foreground text-center mb-8">
+            {t('home.experiencesTitle')}
+          </Text>
+          <View className="w-full max-w-lg gap-4">
+            {EXPERIENCES.map((exp) => (
+              <Card key={exp.nameKey} className="w-full border-accent/20">
+                <CardContent className="flex-row items-center gap-4 pt-4">
+                  <Text className="text-3xl">{exp.emoji}</Text>
+                  <View className="flex-1 gap-1">
+                    <Text className="text-base font-semibold text-foreground">
+                      {t(exp.nameKey)}
+                    </Text>
+                    <Text className="text-sm text-muted-foreground">{t(exp.descKey)}</Text>
+                  </View>
+                </CardContent>
+              </Card>
+            ))}
+          </View>
+        </View>
+
         {/* Featured Creations */}
-        <View className="bg-muted/50 px-8 py-12 items-center">
+        <View className="px-8 py-12 items-center">
           <Text className="text-sm tracking-widest text-accent font-semibold uppercase mb-2">
             {t('home.featuredLabel')}
           </Text>
@@ -103,6 +138,9 @@ const HomeScreen: React.FC = () => {
                   <View className="flex-1 gap-1.5">
                     <CardTitle className="text-secondary">{t(item.nameKey)}</CardTitle>
                     <CardDescription>{t(item.descKey)}</CardDescription>
+                    <Text className="text-base font-bold text-accent mt-1">
+                      {t(item.priceKey)}
+                    </Text>
                   </View>
                 </CardHeader>
               </Card>

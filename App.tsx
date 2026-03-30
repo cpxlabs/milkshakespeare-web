@@ -6,6 +6,7 @@ import ErrorBoundary from './src/components/ErrorBoundary';
 import { ThemeProvider } from './src/providers/ThemeProvider';
 import { LanguageProvider } from './src/providers/LanguageProvider';
 import { AuthProvider } from './src/providers/AuthProvider';
+import { CartProvider } from './src/providers/CartProvider';
 import { AdProvider } from './src/providers/AdProvider';
 import { ToastProvider } from './src/providers/ToastProvider';
 import AppNavigator from './src/navigation/AppNavigator';
@@ -18,11 +19,13 @@ export default function App() {
         <ThemeProvider>
           <LanguageProvider>
             <AuthProvider>
-              <AdProvider>
-                <ToastProvider>
-                  <AppNavigator />
-                </ToastProvider>
-              </AdProvider>
+              <CartProvider>
+                <AdProvider>
+                  <ToastProvider>
+                    <AppNavigator />
+                  </ToastProvider>
+                </AdProvider>
+              </CartProvider>
             </AuthProvider>
           </LanguageProvider>
         </ThemeProvider>
