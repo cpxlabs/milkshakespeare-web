@@ -7,6 +7,7 @@ interface User {
   email: string;
   name: string;
   photo?: string;
+  provider?: 'google' | 'facebook' | 'instagram' | 'guest';
 }
 
 interface AuthContextValue {
@@ -14,6 +15,10 @@ interface AuthContextValue {
   isAuthenticated: boolean;
   isLoading: boolean;
   signIn: () => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
+  signInWithFacebook: () => Promise<void>;
+  signInWithInstagram: () => Promise<void>;
+  signInAsGuest: () => Promise<void>;
   signOut: () => Promise<void>;
 }
 
@@ -41,32 +46,80 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     loadUser();
   }, []);
 
-  const signIn = useCallback(async () => {
+  const persistUser = useCallback(async (u: User) => {
+    await AsyncStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(u));
+    setUser(u);
+  }, []);
+
+  const signInWithGoogle = useCallback(async () => {
     try {
       if (Platform.OS === 'web') {
-        // Web stub: simulate sign-in with guest user
-        const guestUser: User = {
-          id: 'guest',
-          email: 'guest@example.com',
-          name: 'Guest User',
+        const googleUser: User = {
+          id: 'google-web-user',
+          email: 'user@gmail.com',
+          name: 'Google User',
+          provider: 'google',
         };
-        await AsyncStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(guestUser));
-        setUser(guestUser);
+        await persistUser(googleUser);
       } else {
-        // Native: use Google Sign-In
-        // This is a stub — real implementation requires @react-native-google-signin/google-signin
         const nativeUser: User = {
-          id: 'native-user',
-          email: 'user@example.com',
-          name: 'Native User',
+          id: 'google-native-user',
+          email: 'user@gmail.com',
+          name: 'Google User',
+          provider: 'google',
         };
-        await AsyncStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(nativeUser));
-        setUser(nativeUser);
+        await persistUser(nativeUser);
       }
     } catch {
       // handle error
     }
-  }, []);
+  }, [persistUser]);
+
+  const signInWithFacebook = useCallback(async () => {
+    try {
+      const fbUser: User = {
+        id: 'facebook-user',
+        email: 'user@facebook.com',
+        name: 'Facebook User',
+        provider: 'facebook',
+      };
+      await persistUser(fbUser);
+    } catch {
+      // handle error
+    }
+  }, [persistUser]);
+
+  const signInWithInstagram = useCallback(async () => {
+    try {
+      const igUser: User = {
+        id: 'instagram-user',
+        email: 'user@instagram.com',
+        name: 'Instagram User',
+        provider: 'instagram',
+      };
+      await persistUser(igUser);
+    } catch {
+      // handle error
+    }
+  }, [persistUser]);
+
+  const signInAsGuest = useCallback(async () => {
+    try {
+      const guestUser: User = {
+        id: 'guest',
+        email: 'guest@example.com',
+        name: 'Guest User',
+        provider: 'guest',
+      };
+      await persistUser(guestUser);
+    } catch {
+      // handle error
+    }
+  }, [persistUser]);
+
+  const signIn = useCallback(async () => {
+    await signInAsGuest();
+  }, [signInAsGuest]);
 
   const signOut = useCallback(async () => {
     try {
@@ -84,6 +137,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isAuthenticated: !!user,
         isLoading,
         signIn,
+        signInWithGoogle,
+        signInWithFacebook,
+        signInWithInstagram,
+        signInAsGuest,
         signOut,
       }}
     >

@@ -6,6 +6,8 @@ export type RootStackParamList = {
   Home: undefined;
   Menu: undefined;
   About: undefined;
+  Login: undefined;
+  Cart: undefined;
 };
 
 export type DrawerParamList = {
@@ -15,6 +17,8 @@ export type DrawerParamList = {
 export type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 export type MenuScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Menu'>;
 export type AboutScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'About'>;
+export type LoginScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Login'>;
+export type CartScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Cart'>;
 export type MenuScreenRouteProp = RouteProp<RootStackParamList, 'Menu'>;
 
 declare global {
