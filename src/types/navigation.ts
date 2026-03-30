@@ -8,6 +8,9 @@ export type RootStackParamList = {
   About: undefined;
   Login: undefined;
   Cart: undefined;
+  Tables: undefined;
+  TableOrder: { tableId: string };
+  Admin: undefined;
 };
 
 export type DrawerParamList = {
@@ -19,7 +22,14 @@ export type MenuScreenNavigationProp = NativeStackNavigationProp<RootStackParamL
 export type AboutScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'About'>;
 export type LoginScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Login'>;
 export type CartScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Cart'>;
+export type TablesScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Tables'>;
+export type TableOrderScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'TableOrder'
+>;
+export type AdminScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Admin'>;
 export type MenuScreenRouteProp = RouteProp<RootStackParamList, 'Menu'>;
+export type TableOrderScreenRouteProp = RouteProp<RootStackParamList, 'TableOrder'>;
 
 declare global {
   namespace ReactNavigation {

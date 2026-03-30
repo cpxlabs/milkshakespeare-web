@@ -3,7 +3,20 @@ import { View, Pressable } from 'react-native';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import type { DrawerContentComponentProps } from '@react-navigation/drawer';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Home, Moon, Sun, Languages, BookOpen, UtensilsCrossed, ShoppingCart, LogIn, User } from 'lucide-react-native';
+import {
+  Home,
+  Moon,
+  Sun,
+  Languages,
+  BookOpen,
+  UtensilsCrossed,
+  ShoppingCart,
+  LogIn,
+  User,
+  Armchair,
+  LayoutDashboard,
+  Eye,
+} from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { Text } from '@/components/ui/text';
 import { Toggle } from '@/components/ui/toggle';
@@ -20,10 +33,13 @@ const LANGUAGES = [
 export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
   const { isDark, toggleTheme } = useTheme();
   const { language, setLanguage } = useLanguage();
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, hasPermission, viewMode, setViewMode } = useAuth();
   const { totalItems } = useCart();
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
+
+  const isAdminOrAbove = hasPermission('admin');
+  const showAdminItems = isAdminOrAbove && viewMode === 'admin';
 
   const navigateToHome = () => {
     props.navigation.navigate('Main', { screen: 'Home' });
@@ -50,10 +66,24 @@ export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
     props.navigation.closeDrawer();
   };
 
+  const navigateToTables = () => {
+    props.navigation.navigate('Main', { screen: 'Tables' });
+    props.navigation.closeDrawer();
+  };
+
+  const navigateToAdmin = () => {
+    props.navigation.navigate('Main', { screen: 'Admin' });
+    props.navigation.closeDrawer();
+  };
+
   const cycleLanguage = () => {
     const currentIndex = LANGUAGES.findIndex((l) => l.code === language);
     const nextIndex = (currentIndex + 1) % LANGUAGES.length;
     setLanguage(LANGUAGES[nextIndex].code);
+  };
+
+  const toggleViewMode = () => {
+    setViewMode(viewMode === 'admin' ? 'client' : 'admin');
   };
 
   const currentLanguageLabel =
@@ -126,6 +156,28 @@ export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
               {isAuthenticated ? user?.name ?? t('sidemenu.profile') : t('sidemenu.login')}
             </Text>
           </Pressable>
+
+          {/* Tables — visible in admin view */}
+          {showAdminItems && (
+            <Pressable
+              onPress={navigateToTables}
+              className="flex-row items-center gap-3 rounded-md px-3 py-3 active:bg-accent"
+            >
+              <Armchair size={20} color={iconColor} />
+              <Text className="text-base text-foreground">{t('sidemenu.tables')}</Text>
+            </Pressable>
+          )}
+
+          {/* Admin Dashboard — visible in admin view */}
+          {showAdminItems && (
+            <Pressable
+              onPress={navigateToAdmin}
+              className="flex-row items-center gap-3 rounded-md px-3 py-3 active:bg-accent"
+            >
+              <LayoutDashboard size={20} color={iconColor} />
+              <Text className="text-base text-foreground">{t('sidemenu.admin')}</Text>
+            </Pressable>
+          )}
         </View>
 
         {/* Spacer */}
@@ -133,6 +185,24 @@ export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
 
         {/* Settings section */}
         <View className="border-t border-border pt-4 gap-3 mb-4">
+          {/* View Mode toggle — only for admin/dev users */}
+          {isAdminOrAbove && (
+            <View className="flex-row items-center justify-between px-3 py-2">
+              <View className="flex-row items-center gap-3">
+                <Eye size={20} color={iconColor} />
+                <Text className="text-base text-foreground">
+                  {viewMode === 'admin' ? t('sidemenu.adminView') : t('sidemenu.clientView')}
+                </Text>
+              </View>
+              <Toggle
+                value={viewMode === 'admin'}
+                onValueChange={toggleViewMode}
+                activeColor="#e74c3c"
+                inactiveColor="#3498db"
+              />
+            </View>
+          )}
+
           {/* Theme toggle */}
           <View className="flex-row items-center justify-between px-3 py-2">
             <View className="flex-row items-center gap-3">
