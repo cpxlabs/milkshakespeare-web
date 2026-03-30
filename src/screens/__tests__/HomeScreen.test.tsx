@@ -9,18 +9,25 @@ jest.mock('react-i18next', () => ({
       const translations: Record<string, string> = {
         'home.title': 'Milkshakespeare',
         'home.subtitle': 'Where Every Sip Tells a Story',
+        'home.heroLabel': 'Welcome to',
         'home.heroTagline': 'Craft milkshakes inspired by the greatest literary works of all time.',
+        'home.aboutLabel': 'Discover',
         'home.aboutTitle': 'Our Story',
         'home.aboutText': 'Born from a love of classic literature and artisanal milkshakes.',
+        'home.featuredLabel': "Don't Miss",
         'home.featuredTitle': 'Featured Creations',
         'home.featuredRomeo': 'Romeo & Juliet Berry',
-        'home.featuredRomeoDesc': 'A passionate blend of strawberries, raspberries, and a hint of rose.',
+        'home.featuredRomeoDesc':
+          'A passionate blend of strawberries, raspberries, and a hint of rose.',
         'home.featuredHamlet': "Hamlet's Dark Chocolate",
         'home.featuredHamletDesc': 'To drink or not to drink.',
         'home.featuredMidsummer': "Midsummer Night's Dream",
         'home.featuredMidsummerDesc': 'Lavender, vanilla bean, and honeycomb.',
         'home.viewFullMenu': 'View Full Menu',
         'home.learnMore': 'Our Story',
+        'home.ctaTitle': 'Ready for a Literary Experience?',
+        'home.ctaText':
+          "Visit us today and discover how the world's greatest stories taste in a glass.",
       };
       return translations[key] || key;
     },
@@ -54,5 +61,22 @@ describe('HomeScreen', () => {
     expect(getByText('Romeo & Juliet Berry')).toBeTruthy();
     expect(getByText("Hamlet's Dark Chocolate")).toBeTruthy();
     expect(getByText("Midsummer Night's Dream")).toBeTruthy();
+  });
+
+  it('displays hero label and decorative elements', () => {
+    const { getByText } = render(<HomeScreen />);
+    expect(getByText('Welcome to')).toBeTruthy();
+  });
+
+  it('displays footer call-to-action section', () => {
+    const { getByText } = render(<HomeScreen />);
+    expect(getByText('Ready for a Literary Experience?')).toBeTruthy();
+  });
+
+  it('displays emoji badges for featured creations', () => {
+    const { getByText } = render(<HomeScreen />);
+    expect(getByText('🍓')).toBeTruthy();
+    expect(getByText('🍫')).toBeTruthy();
+    expect(getByText('🌸')).toBeTruthy();
   });
 });
