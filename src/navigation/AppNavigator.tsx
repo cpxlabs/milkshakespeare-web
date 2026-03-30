@@ -7,6 +7,9 @@ import { DrawerContent } from '../components/DrawerContent';
 import HomeScreen from '../screens/HomeScreen';
 import MenuScreen from '../screens/DetailsScreen';
 import AboutScreen from '../screens/AboutScreen';
+import TablesScreen from '../screens/TablesScreen';
+import TableOrderScreen from '../screens/TableOrderScreen';
+import AdminScreen from '../screens/AdminScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -19,6 +22,9 @@ const MainStack: React.FC = () => (
     <Stack.Screen name="Home" component={HomeScreen} />
     <Stack.Screen name="Menu" component={MenuScreen} />
     <Stack.Screen name="About" component={AboutScreen} />
+    <Stack.Screen name="Tables" component={TablesScreen} />
+    <Stack.Screen name="TableOrder" component={TableOrderScreen} />
+    <Stack.Screen name="Admin" component={AdminScreen} />
   </Stack.Navigator>
 );
 
