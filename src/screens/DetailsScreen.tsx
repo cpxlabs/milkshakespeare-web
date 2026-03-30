@@ -64,6 +64,8 @@ const MENU_SECTIONS: {
   },
 ];
 
+const ADDED_FEEDBACK_DURATION_MS = 1200;
+
 const MenuScreen: React.FC = () => {
   const navigation = useNavigation<MenuScreenNavigationProp>();
   const { t } = useTranslation();
@@ -78,7 +80,7 @@ const MenuScreen: React.FC = () => {
       emoji: item.emoji,
     });
     setAddedId(item.id);
-    setTimeout(() => setAddedId(null), 1200);
+    setTimeout(() => setAddedId(null), ADDED_FEEDBACK_DURATION_MS);
   };
 
   return (
