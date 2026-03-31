@@ -8,6 +8,7 @@ export type RootStackParamList = {
   About: undefined;
   Login: undefined;
   Cart: undefined;
+  Bookings: undefined;
   Tables: undefined;
   TableOrder: { tableId: string };
   Admin: undefined;
@@ -22,6 +23,7 @@ export type MenuScreenNavigationProp = NativeStackNavigationProp<RootStackParamL
 export type AboutScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'About'>;
 export type LoginScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Login'>;
 export type CartScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Cart'>;
+export type BookingsScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Bookings'>;
 export type TablesScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Tables'>;
 export type TableOrderScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,

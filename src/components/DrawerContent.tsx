@@ -16,6 +16,7 @@ import {
   Armchair,
   LayoutDashboard,
   Eye,
+  CalendarDays,
 } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { Text } from '@/components/ui/text';
@@ -73,6 +74,11 @@ export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
 
   const navigateToAdmin = () => {
     props.navigation.navigate('Main', { screen: 'Admin' });
+    props.navigation.closeDrawer();
+  };
+
+  const navigateToBookings = () => {
+    props.navigation.navigate('Main', { screen: 'Bookings' });
     props.navigation.closeDrawer();
   };
 
@@ -141,6 +147,14 @@ export const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
           >
             <BookOpen size={20} color={iconColor} />
             <Text className="text-base text-foreground">{t('sidemenu.about')}</Text>
+          </Pressable>
+
+          <Pressable
+            onPress={navigateToBookings}
+            className="flex-row items-center gap-3 rounded-md px-3 py-3 active:bg-accent"
+          >
+            <CalendarDays size={20} color={iconColor} />
+            <Text className="text-base text-foreground">{t('sidemenu.bookings')}</Text>
           </Pressable>
 
           <Pressable
