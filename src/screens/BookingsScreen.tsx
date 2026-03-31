@@ -353,7 +353,7 @@ const BookingsScreen: React.FC = () => {
                     {t('bookings.summaryTime')}
                   </Text>
                   <Text className="text-base font-bold text-secondary-foreground">
-                    {selectedTime} – {getEndTime(selectedTime!)}
+                    {selectedTime} – {selectedTime && getEndTime(selectedTime)}
                   </Text>
                 </View>
               </View>
