@@ -1,5 +1,7 @@
 # Milkshakespeare
 
+**Live:** https://milkshakespeare-web.vercel.app/
+
 A cross-platform (iOS / Android / Web) React Native app built with Expo, TypeScript, and modern tooling.
 
 ## Features
