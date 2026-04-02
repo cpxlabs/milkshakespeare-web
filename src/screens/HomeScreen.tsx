@@ -32,6 +32,13 @@ const FEATURED_ITEMS = [
   },
 ];
 
+const GALLERY_AREAS = [
+  { nameKey: 'home.galleryCafe', descKey: 'home.galleryCafeDesc', emoji: '☕', borderClass: 'border-t-4 border-t-primary' },
+  { nameKey: 'home.galleryGames', descKey: 'home.galleryGamesDesc', emoji: '🎮', borderClass: 'border-t-4 border-t-secondary' },
+  { nameKey: 'home.galleryBooks', descKey: 'home.galleryBooksDesc', emoji: '📚', borderClass: 'border-t-4 border-t-accent' },
+  { nameKey: 'home.galleryCollectibles', descKey: 'home.galleryCollectiblesDesc', emoji: '🃏', borderClass: 'border-t-4 border-t-destructive' },
+];
+
 const EXPERIENCES = [
   { nameKey: 'home.expGames', descKey: 'home.expGamesDesc', emoji: '♟️' },
   { nameKey: 'home.expTCG', descKey: 'home.expTCGDesc', emoji: '🃏' },
@@ -97,6 +104,35 @@ const HomeScreen: React.FC = () => {
           </View>
         </View>
 
+        {/* Photo Gallery Section */}
+        <View className="bg-muted/30 px-8 py-12 items-center">
+          <Text className="text-sm tracking-widest text-accent font-semibold uppercase mb-2">
+            {t('home.galleryLabel')}
+          </Text>
+          <Text className="text-2xl font-bold text-foreground text-center mb-8">
+            {t('home.galleryTitle')}
+          </Text>
+          <View className="w-full max-w-lg gap-3">
+            {[GALLERY_AREAS.slice(0, 2), GALLERY_AREAS.slice(2, 4)].map((row, rowIdx) => (
+              <View key={rowIdx} className="flex-row gap-3">
+                {row.map((area) => (
+                  <Card key={area.nameKey} className={`flex-1 ${area.borderClass}`}>
+                    <CardContent className="pt-4 pb-4 items-center">
+                      <Text className="text-3xl mb-2">{area.emoji}</Text>
+                      <Text className="text-sm font-bold text-foreground text-center">
+                        {t(area.nameKey)}
+                      </Text>
+                      <Text className="text-xs text-muted-foreground text-center mt-1">
+                        {t(area.descKey)}
+                      </Text>
+                    </CardContent>
+                  </Card>
+                ))}
+              </View>
+            ))}
+          </View>
+        </View>
+
         {/* Experiences Section */}
         <View className="bg-muted/30 px-8 py-12 items-center">
           <Text className="text-sm tracking-widest text-accent font-semibold uppercase mb-2">
@@ -150,6 +186,33 @@ const HomeScreen: React.FC = () => {
           <Button onPress={() => navigation.navigate('Menu')} className="mt-8" size="lg">
             <Text className="font-bold">{t('home.viewFullMenu')}</Text>
           </Button>
+        </View>
+
+        {/* Business Hours Section */}
+        <View className="px-8 py-12 items-center">
+          <Text className="text-sm tracking-widest text-accent font-semibold uppercase mb-2">
+            {t('home.hoursLabel')}
+          </Text>
+          <Text className="text-2xl font-bold text-foreground text-center mb-6">
+            {t('home.hoursTitle')}
+          </Text>
+          <Card className="w-full max-w-lg border-accent/30">
+            <CardContent className="pt-6 gap-4">
+              <View className="flex-row items-center gap-3">
+                <Text className="text-2xl">🕐</Text>
+                <Text className="text-base font-semibold text-foreground flex-1">
+                  {t('home.hoursValue')}
+                </Text>
+              </View>
+              <View className="h-px bg-border" />
+              <View className="flex-row items-center gap-3">
+                <Text className="text-2xl">📍</Text>
+                <Text className="text-base text-muted-foreground flex-1">
+                  {t('home.hoursAddress')}
+                </Text>
+              </View>
+            </CardContent>
+          </Card>
         </View>
 
         {/* Footer CTA */}
