@@ -25,12 +25,13 @@
     --input: 46 30% 80%;
     --ring: 46 63% 53%;               /* Metallic Gold */
     --radius: 0.5rem;
+    --heading-foreground: 38 78% 58%; /* Mustard Yellow #E8AA42 */
   }
 
   .dark {
     /* Milkshakespeare Brand — Dark Mode */
     --background: 217 74% 10%;        /* Darker Prussian Blue */
-    --foreground: 50 100% 95%;        /* Ivory Mist */
+    --foreground: 38 78% 58%;         /* Mustard Yellow #E8AA42 */
     --card: 217 74% 14%;
     --card-foreground: 50 100% 95%;
     --popover: 217 74% 14%;
@@ -48,5 +49,6 @@
     --border: 217 40% 25%;
     --input: 217 40% 25%;
     --ring: 46 63% 53%;               /* Metallic Gold */
+    --heading-foreground: 38 78% 58%; /* Mustard Yellow #E8AA42 */
   }
 }
