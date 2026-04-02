@@ -54,8 +54,24 @@ const HomeScreen: React.FC = () => {
     <View className="flex-1 bg-background">
       <MenuButton />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        {/* Info Bar — Address & Hours */}
+        <View className="bg-secondary px-6 py-3 flex-row items-center justify-center gap-6 flex-wrap">
+          <View className="flex-row items-center gap-2">
+            <Text className="text-base">📍</Text>
+            <Text className="text-sm font-medium text-secondary-foreground">
+              {t('home.hoursAddress')}
+            </Text>
+          </View>
+          <View className="flex-row items-center gap-2">
+            <Text className="text-base">🕐</Text>
+            <Text className="text-sm font-medium text-secondary-foreground">
+              {t('home.hoursValue')}
+            </Text>
+          </View>
+        </View>
+
         {/* Hero Section */}
-        <View className="bg-primary px-8 pt-20 pb-14 items-center">
+        <View className="bg-primary px-8 pt-16 pb-14 items-center">
           <Text className="text-lg tracking-widest text-accent font-semibold uppercase text-center mb-2">
             {t('home.heroLabel')}
           </Text>
@@ -186,33 +202,6 @@ const HomeScreen: React.FC = () => {
           <Button onPress={() => navigation.navigate('Menu')} className="mt-8" size="lg">
             <Text className="font-bold">{t('home.viewFullMenu')}</Text>
           </Button>
-        </View>
-
-        {/* Business Hours Section */}
-        <View className="px-8 py-12 items-center">
-          <Text className="text-sm tracking-widest text-accent font-semibold uppercase mb-2">
-            {t('home.hoursLabel')}
-          </Text>
-          <Text className="text-2xl font-bold text-foreground text-center mb-6">
-            {t('home.hoursTitle')}
-          </Text>
-          <Card className="w-full max-w-lg border-accent/30">
-            <CardContent className="pt-6 gap-4">
-              <View className="flex-row items-center gap-3">
-                <Text className="text-2xl">🕐</Text>
-                <Text className="text-base font-semibold text-foreground flex-1">
-                  {t('home.hoursValue')}
-                </Text>
-              </View>
-              <View className="h-px bg-border" />
-              <View className="flex-row items-center gap-3">
-                <Text className="text-2xl">📍</Text>
-                <Text className="text-base text-muted-foreground flex-1">
-                  {t('home.hoursAddress')}
-                </Text>
-              </View>
-            </CardContent>
-          </Card>
         </View>
 
         {/* Footer CTA */}
