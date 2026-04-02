@@ -40,6 +40,8 @@ jest.mock('react-i18next', () => ({
         'home.ctaTitle': 'Ready for a Literary Experience?',
         'home.ctaText':
           "Visit us today and discover how the world's greatest stories taste in a glass.",
+        'home.hoursAddress': '12 Stratford Lane, Avon District',
+        'home.hoursValue': 'Open daily 10am – 10pm',
       };
       return translations[key] || key;
     },
@@ -93,6 +95,12 @@ describe('HomeScreen', () => {
     expect(getByText('🍓')).toBeTruthy();
     expect(getByText('🍫')).toBeTruthy();
     expect(getByText('🌸')).toBeTruthy();
+  });
+
+  it('displays address and hours info bar at the top', () => {
+    const { getByText } = render(<HomeScreen />);
+    expect(getByText('12 Stratford Lane, Avon District')).toBeTruthy();
+    expect(getByText('Open daily 10am – 10pm')).toBeTruthy();
   });
 
   it('displays experiences section', () => {
