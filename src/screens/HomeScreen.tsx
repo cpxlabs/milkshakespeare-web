@@ -1,49 +1,31 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { HomeScreenNavigationProp } from '../types/navigation';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { MenuButton } from '@/components/ui/menu-button';
 
-const FEATURED_ITEMS = [
+const RARE_EDITIONS = [
   {
-    nameKey: 'home.featuredRomeo',
-    descKey: 'home.featuredRomeoDesc',
-    priceKey: 'home.featuredRomeoPrice',
-    emoji: '🍓',
-    accentClass: 'border-l-4 border-l-destructive',
-  },
-  {
-    nameKey: 'home.featuredHamlet',
-    descKey: 'home.featuredHamletDesc',
-    priceKey: 'home.featuredHamletPrice',
-    emoji: '🍫',
-    accentClass: 'border-l-4 border-l-secondary',
-  },
-  {
-    nameKey: 'home.featuredMidsummer',
-    descKey: 'home.featuredMidsummerDesc',
-    priceKey: 'home.featuredMidsummerPrice',
+    nameKey: 'home.rareOpheliaName',
+    priceKey: 'home.rareOpheliaPrice',
+    descKey: 'home.rareOpheliaDesc',
     emoji: '🌸',
-    accentClass: 'border-l-4 border-l-accent',
   },
-];
-
-const GALLERY_AREAS = [
-  { nameKey: 'home.galleryCafe', descKey: 'home.galleryCafeDesc', emoji: '☕', borderClass: 'border-t-4 border-t-primary' },
-  { nameKey: 'home.galleryGames', descKey: 'home.galleryGamesDesc', emoji: '🎮', borderClass: 'border-t-4 border-t-secondary' },
-  { nameKey: 'home.galleryBooks', descKey: 'home.galleryBooksDesc', emoji: '📚', borderClass: 'border-t-4 border-t-accent' },
-  { nameKey: 'home.galleryCollectibles', descKey: 'home.galleryCollectiblesDesc', emoji: '🃏', borderClass: 'border-t-4 border-t-destructive' },
-];
-
-const EXPERIENCES = [
-  { nameKey: 'home.expGames', descKey: 'home.expGamesDesc', emoji: '♟️' },
-  { nameKey: 'home.expTCG', descKey: 'home.expTCGDesc', emoji: '🃏' },
-  { nameKey: 'home.expBooks', descKey: 'home.expBooksDesc', emoji: '📚' },
-  { nameKey: 'home.expCollectibles', descKey: 'home.expCollectiblesDesc', emoji: '🎮' },
+  {
+    nameKey: 'home.rareMacbethName',
+    priceKey: 'home.rareMacbethPrice',
+    descKey: 'home.rareMacbethDesc',
+    emoji: '🗡️',
+  },
+  {
+    nameKey: 'home.rarePuckName',
+    priceKey: 'home.rarePuckPrice',
+    descKey: 'home.rarePuckDesc',
+    emoji: '✨',
+  },
 ];
 
 const HomeScreen: React.FC = () => {
@@ -52,40 +34,202 @@ const HomeScreen: React.FC = () => {
 
   return (
     <View className="flex-1 bg-background">
-      <MenuButton />
+      {/* ── Top Nav Bar ── */}
+      <View className="bg-background px-4 pt-3 pb-3 flex-row items-center justify-between border-b border-border/40">
+        <View className="flex-row items-center gap-2">
+          <MenuButton className="static top-0 left-0 z-0 w-9 h-9 bg-transparent border-transparent" />
+          <Text className="text-sm font-bold text-foreground tracking-tight">
+            ♛ {t('home.title')}
+          </Text>
+        </View>
+        <View className="flex-row items-center gap-1">
+          <Text className="text-xs">📍</Text>
+          <Text className="text-xs tracking-widest text-muted-foreground font-semibold uppercase">
+            {t('home.navLocation')}
+          </Text>
+        </View>
+      </View>
+
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        {/* Info Bar — Address & Hours */}
-        <View className="bg-secondary px-6 py-3 flex-row items-center justify-center gap-6 flex-wrap">
-          <View className="flex-row items-center gap-2">
-            <Text className="text-base">📍</Text>
-            <Text className="text-sm font-medium text-secondary-foreground">
-              {t('home.hoursAddress')}
+        {/* ── Hero Section ── */}
+        <View className="bg-background px-5 pt-6 pb-10">
+          <Text className="text-xs tracking-widest text-muted-foreground font-medium uppercase mb-5">
+            {t('home.navEstablished')}
+          </Text>
+          {/* Mixed-style headline: "Prose" and "Palate" in bold italic */}
+          <Text className="text-5xl font-extrabold text-foreground leading-tight tracking-tight">
+            {'Where '}
+            <Text className="italic">{'Prose'}</Text>
+            {'\nmeets the '}
+            <Text className="italic">{'Palate'}</Text>
+            {'.'}
+          </Text>
+          <Text className="text-sm text-muted-foreground mt-5 leading-6 max-w-xs">
+            {t('home.heroDescription')}
+          </Text>
+          <Button
+            onPress={() => navigation.navigate('Bookings')}
+            className="bg-primary mt-7 rounded-full self-start px-8"
+            size="lg"
+          >
+            <Text className="text-primary-foreground font-bold text-sm">
+              {t('home.heroReserveBtn')}
             </Text>
-          </View>
-          <View className="flex-row items-center gap-2">
-            <Text className="text-base">🕐</Text>
-            <Text className="text-sm font-medium text-secondary-foreground">
-              {t('home.hoursValue')}
-            </Text>
+          </Button>
+          <Pressable onPress={() => navigation.navigate('Menu')} className="mt-4">
+            <Text className="text-sm text-muted-foreground">{t('home.heroViewMenu')}</Text>
+          </Pressable>
+        </View>
+
+        {/* ── Featured Drink of the Month ── */}
+        <View className="px-4 mb-8">
+          <View className="rounded-2xl overflow-hidden bg-primary">
+            {/* Large image area */}
+            <View className="w-full h-52 bg-secondary/25 items-center justify-center">
+              <Text className="text-9xl">🥤</Text>
+            </View>
+            {/* Caption — stacked vertically */}
+            <View className="px-5 py-4">
+              <Text className="text-base font-semibold italic text-primary-foreground">
+                {t('home.featuredDrinkName')}
+              </Text>
+              <Text className="text-xs tracking-widest text-accent font-semibold uppercase mt-1">
+                {t('home.featuredDrinkLabel')}
+              </Text>
+            </View>
           </View>
         </View>
 
-        {/* Hero Section */}
-        <View className="bg-primary px-8 pt-16 pb-14 items-center">
-          <Text className="text-lg tracking-widest text-accent font-semibold uppercase text-center mb-2">
-            {t('home.heroLabel')}
+        {/* ── Chapter Select ── */}
+        <View className="px-5 mb-10">
+          <Text className="text-xs tracking-widest text-muted-foreground font-semibold uppercase mb-4">
+            {t('home.chapterSelectTitle')}
           </Text>
-          <Text className="text-5xl font-extrabold text-primary-foreground text-center tracking-tight">
-            {t('home.title')}
+
+          {/* Explore the Menu — dark blue card, left-aligned */}
+          <Pressable onPress={() => navigation.navigate('Menu')}>
+            <View className="bg-secondary rounded-2xl px-5 py-6 mb-3 flex-row items-center gap-4">
+              <Text className="text-3xl">🍴</Text>
+              <View className="flex-1">
+                <Text className="text-xl font-bold text-secondary-foreground">
+                  {t('home.exploreMenuTitle')}
+                </Text>
+                <Text className="text-xs text-secondary-foreground/70 mt-1 italic leading-5">
+                  {t('home.exploreMenuSubtitle')}
+                </Text>
+              </View>
+            </View>
+          </Pressable>
+
+          {/* Daily Riddle + Book a Table — two small side-by-side cards */}
+          <View className="flex-row gap-3">
+            <View className="flex-1 bg-card border border-border rounded-2xl px-4 py-5 items-center gap-2">
+              <Text className="text-2xl">🧩</Text>
+              <Text className="text-sm font-bold text-foreground text-center">
+                {t('home.dailyRiddleTitle')}
+              </Text>
+              <Text className="text-xs text-accent font-semibold uppercase tracking-wide text-center">
+                {t('home.dailyRiddleSubtitle')}
+              </Text>
+            </View>
+            <Pressable
+              className="flex-1"
+              onPress={() => navigation.navigate('Bookings')}
+            >
+              <View className="bg-card border border-border rounded-2xl px-4 py-5 items-center gap-2 flex-1">
+                <Text className="text-2xl">📅</Text>
+                <Text className="text-sm font-bold text-foreground text-center">
+                  {t('home.bookTableTitle')}
+                </Text>
+                <Text className="text-xs text-accent font-semibold uppercase tracking-wide text-center">
+                  {t('home.bookTableSubtitle')}
+                </Text>
+              </View>
+            </Pressable>
+          </View>
+        </View>
+
+        {/* ── Library Section ── */}
+        <View className="px-5 mb-10">
+          {/* Mixed-style heading: "Thirsty Mind" in italic */}
+          <Text className="text-3xl font-extrabold text-foreground leading-tight tracking-tight">
+            {'A Library Built for the '}
+            <Text className="italic">{'Thirsty Mind.'}</Text>
           </Text>
-          <View className="w-16 h-1 bg-accent rounded-full mt-4 mb-4" />
-          <Text className="text-xl text-primary-foreground/80 text-center italic">
-            {t('home.subtitle')}
+          <Text className="text-sm text-muted-foreground mt-5 leading-6">
+            {t('home.libraryText')}
           </Text>
-          <Text className="text-base text-primary-foreground/70 text-center mt-4 max-w-md leading-6">
-            {t('home.heroTagline')}
+          <Text className="text-base italic text-foreground mt-6">
+            {t('home.libraryCurator')}
           </Text>
-          <View className="flex-row gap-3 mt-8">
+          <View className="mt-4 border-l-4 border-l-accent pl-4">
+            <Text className="text-sm italic text-muted-foreground leading-6">
+              {t('home.libraryQuote')}
+            </Text>
+            <Text className="text-xs font-semibold text-foreground mt-2">
+              {t('home.libraryQuoteAttribution')}
+            </Text>
+          </View>
+          {/* Two atmospheric image placeholders */}
+          <View className="flex-row gap-3 mt-6">
+            <View className="flex-1 h-28 bg-primary rounded-xl items-center justify-center">
+              <Text className="text-4xl">📚</Text>
+            </View>
+            <View className="flex-1 h-28 bg-secondary rounded-xl items-center justify-center">
+              <Text className="text-4xl">🕯️</Text>
+            </View>
+          </View>
+        </View>
+
+        {/* ── Rare Editions ── */}
+        <View className="px-5 mb-10">
+          <View className="flex-row items-baseline justify-between mb-1">
+            <Text className="text-2xl font-extrabold text-foreground">
+              {t('home.rareEditionsTitle')}
+            </Text>
+            <Pressable onPress={() => navigation.navigate('Menu')}>
+              <Text className="text-xs tracking-widest text-accent font-bold uppercase">
+                {t('home.rareEditionsViewCatalog')}
+              </Text>
+            </Pressable>
+          </View>
+          <Text className="text-xs tracking-widest text-muted-foreground font-semibold uppercase mb-6">
+            {t('home.rareEditionsSubtitle')}
+          </Text>
+
+          {/* Each drink: tall full-width portrait image card */}
+          {RARE_EDITIONS.map((item) => (
+            <View key={item.nameKey} className="mb-8">
+              {/* Tall portrait image */}
+              <View className="w-full h-64 bg-primary rounded-2xl items-center justify-center mb-4 overflow-hidden">
+                <Text className="text-8xl">{item.emoji}</Text>
+              </View>
+              {/* Name + price row */}
+              <View className="flex-row items-baseline justify-between mb-1">
+                <Text className="text-lg font-bold text-foreground italic">
+                  {t(item.nameKey)}
+                </Text>
+                <Text className="text-base font-bold text-foreground">
+                  {t(item.priceKey)}
+                </Text>
+              </View>
+              {/* Description */}
+              <Text className="text-sm text-muted-foreground leading-5">
+                {t(item.descKey)}
+              </Text>
+            </View>
+          ))}
+        </View>
+
+        {/* ── Footer CTA ── */}
+        <View className="bg-primary px-5 py-10">
+          <Text className="text-xl font-bold text-primary-foreground">
+            {t('home.ctaTitle')}
+          </Text>
+          <Text className="text-sm text-primary-foreground/80 mt-3 leading-6">
+            {t('home.ctaText')}
+          </Text>
+          <View className="flex-row gap-3 mt-6">
             <Button
               onPress={() => navigation.navigate('Menu')}
               className="bg-accent px-6"
@@ -104,121 +248,20 @@ const HomeScreen: React.FC = () => {
           </View>
         </View>
 
-        {/* About Preview */}
-        <View className="px-8 py-12 items-center">
-          <View className="w-full max-w-lg items-center">
-            <Text className="text-sm tracking-widest text-accent font-semibold uppercase mb-2">
-              {t('home.aboutLabel')}
-            </Text>
-            <Text className="text-2xl font-bold text-foreground text-center">
-              {t('home.aboutTitle')}
-            </Text>
-            <View className="w-10 h-0.5 bg-accent rounded-full mt-3 mb-4" />
-            <Text className="text-base text-muted-foreground text-center max-w-lg leading-7">
-              {t('home.aboutText')}
+        {/* ── Info Bar ── */}
+        <View className="bg-secondary px-5 py-4 flex-row items-center gap-6 flex-wrap">
+          <View className="flex-row items-center gap-2">
+            <Text className="text-sm">📍</Text>
+            <Text className="text-xs font-medium text-secondary-foreground">
+              {t('home.hoursAddress')}
             </Text>
           </View>
-        </View>
-
-        {/* Photo Gallery Section */}
-        <View className="bg-muted/30 px-8 py-12 items-center">
-          <Text className="text-sm tracking-widest text-accent font-semibold uppercase mb-2">
-            {t('home.galleryLabel')}
-          </Text>
-          <Text className="text-2xl font-bold text-foreground text-center mb-8">
-            {t('home.galleryTitle')}
-          </Text>
-          <View className="w-full max-w-lg gap-3">
-            {[GALLERY_AREAS.slice(0, 2), GALLERY_AREAS.slice(2, 4)].map((row, rowIdx) => (
-              <View key={rowIdx} className="flex-row gap-3">
-                {row.map((area) => (
-                  <Card key={area.nameKey} className={`flex-1 ${area.borderClass}`}>
-                    <CardContent className="pt-4 pb-4 items-center">
-                      <Text className="text-3xl mb-2">{area.emoji}</Text>
-                      <Text className="text-sm font-bold text-foreground text-center">
-                        {t(area.nameKey)}
-                      </Text>
-                      <Text className="text-xs text-muted-foreground text-center mt-1">
-                        {t(area.descKey)}
-                      </Text>
-                    </CardContent>
-                  </Card>
-                ))}
-              </View>
-            ))}
+          <View className="flex-row items-center gap-2">
+            <Text className="text-sm">🕐</Text>
+            <Text className="text-xs font-medium text-secondary-foreground">
+              {t('home.hoursValue')}
+            </Text>
           </View>
-        </View>
-
-        {/* Experiences Section */}
-        <View className="bg-muted/30 px-8 py-12 items-center">
-          <Text className="text-sm tracking-widest text-accent font-semibold uppercase mb-2">
-            ✨
-          </Text>
-          <Text className="text-2xl font-bold text-foreground text-center mb-8">
-            {t('home.experiencesTitle')}
-          </Text>
-          <View className="w-full max-w-lg gap-4">
-            {EXPERIENCES.map((exp) => (
-              <Card key={exp.nameKey} className="w-full border-accent/20">
-                <CardContent className="flex-row items-center gap-4 pt-4">
-                  <Text className="text-3xl">{exp.emoji}</Text>
-                  <View className="flex-1 gap-1">
-                    <Text className="text-base font-semibold text-foreground">
-                      {t(exp.nameKey)}
-                    </Text>
-                    <Text className="text-sm text-muted-foreground">{t(exp.descKey)}</Text>
-                  </View>
-                </CardContent>
-              </Card>
-            ))}
-          </View>
-        </View>
-
-        {/* Featured Creations */}
-        <View className="px-8 py-12 items-center">
-          <Text className="text-sm tracking-widest text-accent font-semibold uppercase mb-2">
-            {t('home.featuredLabel')}
-          </Text>
-          <Text className="text-2xl font-bold text-foreground text-center mb-8">
-            {t('home.featuredTitle')}
-          </Text>
-          <View className="w-full max-w-lg gap-4">
-            {FEATURED_ITEMS.map((item) => (
-              <Card key={item.nameKey} className={`w-full ${item.accentClass}`}>
-                <CardHeader className="flex-row items-center gap-4">
-                  <Text className="text-3xl">{item.emoji}</Text>
-                  <View className="flex-1 gap-1.5">
-                    <CardTitle className="text-secondary">{t(item.nameKey)}</CardTitle>
-                    <CardDescription>{t(item.descKey)}</CardDescription>
-                    <Text className="text-base font-bold text-accent mt-1">
-                      {t(item.priceKey)}
-                    </Text>
-                  </View>
-                </CardHeader>
-              </Card>
-            ))}
-          </View>
-
-          <Button onPress={() => navigation.navigate('Menu')} className="mt-8" size="lg">
-            <Text className="font-bold">{t('home.viewFullMenu')}</Text>
-          </Button>
-        </View>
-
-        {/* Footer CTA */}
-        <View className="bg-secondary px-8 py-10 items-center">
-          <Text className="text-xl font-bold text-secondary-foreground text-center">
-            {t('home.ctaTitle')}
-          </Text>
-          <Text className="text-base text-secondary-foreground/80 text-center mt-2 max-w-md leading-6">
-            {t('home.ctaText')}
-          </Text>
-          <Button
-            variant="outline"
-            onPress={() => navigation.navigate('About')}
-            className="mt-6 border-secondary-foreground/30"
-          >
-            <Text className="text-secondary-foreground font-semibold">{t('home.learnMore')}</Text>
-          </Button>
         </View>
       </ScrollView>
     </View>
