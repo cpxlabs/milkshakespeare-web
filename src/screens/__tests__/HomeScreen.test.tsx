@@ -73,13 +73,15 @@ describe('HomeScreen', () => {
   it('displays the brand name and navigation bar', () => {
     const { getAllByText, getByText } = render(<HomeScreen />);
     expect(getAllByText(/Milkshakespeare/).length).toBeGreaterThan(0);
-    expect(getByText('EST. 1564')).toBeTruthy();
     expect(getByText('STRATFORD')).toBeTruthy();
   });
 
   it('displays hero section with headline and CTA', () => {
-    const { getByText } = render(<HomeScreen />);
-    expect(getByText('Where Prose meets the Palate.')).toBeTruthy();
+    const { getAllByText, getByText } = render(<HomeScreen />);
+    // "Prose" and "Palate" are rendered as nested Text nodes for gold italic styling
+    expect(getAllByText(/Prose/).length).toBeGreaterThan(0);
+    expect(getAllByText(/Palate/).length).toBeGreaterThan(0);
+    expect(getByText('EST. 1564')).toBeTruthy();
     expect(getByText('Reserve Your Table')).toBeTruthy();
     expect(getByText('View Menu')).toBeTruthy();
   });
@@ -99,8 +101,9 @@ describe('HomeScreen', () => {
   });
 
   it('displays library section with quote', () => {
-    const { getByText } = render(<HomeScreen />);
-    expect(getByText('A Library Built for the Thirsty Mind.')).toBeTruthy();
+    const { getAllByText, getByText } = render(<HomeScreen />);
+    // Heading uses nested Text: "A Library Built for the " + italic "Thirsty Mind."
+    expect(getAllByText(/Thirsty Mind/).length).toBeGreaterThan(0);
     expect(getByText('The Curator')).toBeTruthy();
     expect(getByText('— Henry V')).toBeTruthy();
   });
