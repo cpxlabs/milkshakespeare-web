@@ -39,7 +39,7 @@ const HomeScreen: React.FC = () => {
         <View className="flex-row items-center gap-2">
           <MenuButton className="static top-0 left-0 z-0 w-9 h-9 bg-transparent border-transparent" />
           <Text className="text-sm font-bold text-foreground tracking-tight">
-            {t('home.title')}
+            ♛ {t('home.title')}
           </Text>
         </View>
         <View className="flex-row items-center gap-1">
@@ -48,9 +48,6 @@ const HomeScreen: React.FC = () => {
             {t('home.navLocation')}
           </Text>
         </View>
-        <Pressable onPress={() => navigation.navigate('Cart')} accessibilityLabel="Open cart">
-          <Text className="text-xl">🛒</Text>
-        </Pressable>
       </View>
 
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -59,12 +56,12 @@ const HomeScreen: React.FC = () => {
           <Text className="text-xs tracking-widest text-muted-foreground font-medium uppercase mb-5">
             {t('home.navEstablished')}
           </Text>
-          {/* Mixed-style headline: "Prose" and "Palate" in gold italic */}
+          {/* Mixed-style headline: "Prose" and "Palate" in bold italic */}
           <Text className="text-5xl font-extrabold text-foreground leading-tight tracking-tight">
             {'Where '}
-            <Text className="text-accent italic">{'Prose'}</Text>
+            <Text className="italic">{'Prose'}</Text>
             {'\nmeets the '}
-            <Text className="text-accent italic">{'Palate'}</Text>
+            <Text className="italic">{'Palate'}</Text>
             {'.'}
           </Text>
           <Text className="text-sm text-muted-foreground mt-5 leading-6 max-w-xs">
@@ -72,10 +69,10 @@ const HomeScreen: React.FC = () => {
           </Text>
           <Button
             onPress={() => navigation.navigate('Bookings')}
-            className="bg-accent mt-7 rounded-full self-start px-8"
+            className="bg-primary mt-7 rounded-full self-start px-8"
             size="lg"
           >
-            <Text className="text-accent-foreground font-bold text-sm">
+            <Text className="text-primary-foreground font-bold text-sm">
               {t('home.heroReserveBtn')}
             </Text>
           </Button>
@@ -91,16 +88,14 @@ const HomeScreen: React.FC = () => {
             <View className="w-full h-52 bg-secondary/25 items-center justify-center">
               <Text className="text-9xl">🥤</Text>
             </View>
-            {/* Caption row */}
-            <View className="px-5 py-4 flex-row items-center justify-between">
-              <Text className="text-base font-semibold italic text-primary-foreground flex-1 mr-4">
+            {/* Caption — stacked vertically */}
+            <View className="px-5 py-4">
+              <Text className="text-base font-semibold italic text-primary-foreground">
                 {t('home.featuredDrinkName')}
               </Text>
-              <View className="bg-accent rounded-md px-3 py-1 self-start">
-                <Text className="text-xs font-bold text-accent-foreground uppercase tracking-widest">
-                  {t('home.featuredDrinkLabel')}
-                </Text>
-              </View>
+              <Text className="text-xs tracking-widest text-accent font-semibold uppercase mt-1">
+                {t('home.featuredDrinkLabel')}
+              </Text>
             </View>
           </View>
         </View>
