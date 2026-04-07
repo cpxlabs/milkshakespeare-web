@@ -11,8 +11,6 @@
     "navLocation": "STRATFORD",
 
     "heroHeadline": "Onde a Prosa encontra o Paladar.",
-    "heroProseBold": "Prosa",
-    "heroPalateBold": "Paladar",
     "heroDescription": "Um santuário para a alma literária. Saboreie milkshakes artesanais criados a partir de receitas esquecidas e imaginação contemporânea.",
     "heroReserveBtn": "Reserve sua Mesa",
     "heroViewMenu": "Ver Cardápio",
@@ -29,7 +27,6 @@
     "bookTableSubtitle": "CANTINHO TRANQUILO GARANTIDO",
 
     "libraryTitle": "Uma Biblioteca para a Mente Sedenta.",
-    "libraryThirstyBold": "Mente Sedenta",
     "libraryText": "O Milkshakespeare nasceu de uma crença simples: que uma grande história é melhor compartilhada com uma grande bebida. Nosso espaço é forrado com mais de 2.000 clássicos, todos disponíveis para você folhear enquanto saboreia.",
     "libraryCurator": "O Curador",
     "libraryQuote": "\"Eu daria toda a minha fama por uma caneca de cerveja e segurança.\"",

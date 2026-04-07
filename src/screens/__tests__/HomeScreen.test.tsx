@@ -71,8 +71,8 @@ describe('HomeScreen', () => {
   });
 
   it('displays the brand name and navigation bar', () => {
-    const { getByText } = render(<HomeScreen />);
-    expect(getByText(/Milkshakespeare/)).toBeTruthy();
+    const { getAllByText, getByText } = render(<HomeScreen />);
+    expect(getAllByText(/Milkshakespeare/).length).toBeGreaterThan(0);
     expect(getByText('EST. 1564')).toBeTruthy();
     expect(getByText('STRATFORD')).toBeTruthy();
   });
